@@ -5,5 +5,5 @@ module.exports = {
 }
 
 function find() {
-  return db("user").orderBy("id")
+  return db("member").orderBy("id")
 }
