@@ -11,18 +11,14 @@ module.exports = {
 function getAll() {
   return db("messages")
     .join("member", "member.id", "messages.member_id")
-    .select(
-      "messages.description"
-    )
+    .select("messages.member_id", "messages.description")
     .orderBy("messages.id");
 }
 
 function getById(id) {
   return db("messages")
     .join("member", "member.id", "messages.member_id")
-    .select(
-      "messages.description"
-    )
+    .select("messages.member_id", "messages.description")
     .where({ "messages.id": id })
     .first();
 }
