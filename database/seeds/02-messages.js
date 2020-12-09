@@ -4,11 +4,13 @@ exports.seed = function (knex) {
       id: 1,
       member_id: 1,
       description: "Hello World",
+      topic_id: 1
     },
     {
       id: 2,
       member_id: 2,
       description: "Want to raid?",
+      topic_id: 1
     },
   ];
   return knex("messages")
