@@ -1,7 +1,8 @@
 const router = require("express").Router();
+
 const Messages = require("./messages-model");
 const { validateMessage, validateMessageId } = require("./messages-middleware");
-const { requiresAdmin } = require("../auth/restricted-middleware");
+const requiresToken = require("../auth/restricted-middleware");
 
 router.get("/", (req, res) => {
   Messages.getAll()
@@ -17,7 +18,7 @@ router.get("/:id", validateMessageId, (req, res) => {
   res.status(200).json({ howto: req.howto });
 });
 
-router.post("/", requiresAdmin, validateMessage, (req, res) => {
+router.post("/", requiresToken, validateMessage, (req, res) => {
   const howto = req.body;
 
   Messages.add(howto)
@@ -31,7 +32,7 @@ router.post("/", requiresAdmin, validateMessage, (req, res) => {
 
 router.put(
   "/:id",
-  requiresAdmin,
+  requiresToken,
   validateMessageId,
   validateMessage,
   (req, res) => {
@@ -50,7 +51,7 @@ router.put(
   }
 );
 
-router.delete("/:id", requiresAdmin, validateMessageId, (req, res) => {
+router.delete("/:id", requiresToken, validateMessageId, (req, res) => {
   const id = req.params.id;
 
   Messages.remove(id)

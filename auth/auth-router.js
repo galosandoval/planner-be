@@ -24,7 +24,7 @@ router.post("/register", (req, res) => {
       });
   } else {
     res.status(400).json({
-      message: "please provide your email, username, and password",
+      message: "please provide your username, and password",
     });
   }
 });
@@ -42,7 +42,7 @@ router.post("/login", (req, res) => {
           if (member && bcryptjs.compareSync(creds.password, member.password)) {
             const token = makeJwt(member);
 
-            res.status(200).json({ message: "Welsome to our API", token });
+            res.status(200).json({ message: "Welcome to my chat app", token });
           } else {
             res.status(401).json({ message: "Invalid credentials" });
           }
