@@ -6,8 +6,8 @@ const requiresToken = require("../auth/restricted-middleware");
 
 router.get("/", (req, res) => {
   Topic.getAll()
-    .then((Topic) => {
-      res.status(200).json({ Topic });
+    .then((topic) => {
+      res.status(200).json({ topic });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", validateTopic, (req, res) => {
-  res.status(200).json({ howto: req.howto });
+  res.status(200).json({ topic: req.topic });
 });
 
 router.post("/", requiresToken, (req, res) => {
