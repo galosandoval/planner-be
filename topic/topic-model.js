@@ -10,27 +10,26 @@ module.exports = {
 
 function getAll() {
   return db("topic")
-    .join("messages", "messages.topic_id", "topic.id")
     .select(
       "topic.id as topic_id",
-      "topic.title",
-      "messages.id as message_id",
-      "messages.description"
+      "topic.title"
     )
     .orderBy("topic.id");
 }
 
 function getById(id) {
   return db("topic")
-    .join("member", "member.id", "topic.member_id")
-    .select("topic.member_id", "topic.titl")
+    .select(
+      "topic.id as topic_id",
+      "topic.title"
+    )
     .where({ "topic.id": id })
     .first();
 }
 
-function add(howto) {
+function add(topic) {
   return db("topic")
-    .insert(howto)
+    .insert(topic)
     .returning("id")
     .then(([id]) => {
       return getById(id);

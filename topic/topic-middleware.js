@@ -1,15 +1,15 @@
-const Messages = require("./messages-model");
+const Topic = require("./topic-model");
 const Member = require("../user/member-model");
 
 module.exports = {
-  validateMessage,
-  validateMessageId,
+  validateTopic,
+  validateTopicId,
 };
 
-function validateMessageId(req, res, next) {
+function validateTopicId(req, res, next) {
   const id = req.params.id;
 
-  Messages.getById(id)
+  Topic.getById(id)
     .then((Message) => {
       if (Message) {
         req.Message = Message;
@@ -23,16 +23,16 @@ function validateMessageId(req, res, next) {
     });
 }
 
-function validateMessage(req, res, next) {
-  const { member_id } = req.body;
+function validateTopic(req, res, next) {
+  const { title } = req.body;
 
-  if (!member_id) {
+  if (!title) {
     res.status(400).json({
       error:
-        "Please provide all required fields: member_id",
+        "Please provide all required fields: title",
     });
   } else {
-    Member.findById(member_id)
+    Member.findById(title)
       .then((user) => {
         if (user) {
           next();
@@ -40,7 +40,7 @@ function validateMessage(req, res, next) {
           res
             .status(404)
             .json({
-              error: `User with id ${member_id} does not exist. Please provide a valid user id to post howto`,
+              error: `User with id ${title} does not exist. Please provide a valid user id to post howto`,
             });
         }
       })
