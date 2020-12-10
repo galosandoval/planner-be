@@ -11,7 +11,7 @@ module.exports = {
 function getAll() {
   return db("messages")
     .join("member", "member.id", "messages.member_id")
-    .select("messages.member_id", "member.username", "messages.description")
+    .select("message.id", "messages.member_id", "member.username", "messages.description")
     .orderBy("messages.id");
 }
 
