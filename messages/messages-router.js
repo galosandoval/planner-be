@@ -6,8 +6,8 @@ const requiresToken = require("../auth/restricted-middleware");
 
 router.get("/", (req, res) => {
   Messages.getAll()
-    .then((Messages) => {
-      res.status(200).json({ Messages });
+    .then((messages) => {
+      res.status(200).json({ messages });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -15,15 +15,15 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", validateMessageId, (req, res) => {
-  res.status(200).json({ howto: req.howto });
+  res.status(200).json({ howto: req.message });
 });
 
 router.post("/", requiresToken, validateMessage, (req, res) => {
-  const howto = req.body;
+  const newMessage = req.body;
 
-  Messages.add(howto)
-    .then((howto) => {
-      res.status(201).json({ message: "Howto created successfully", howto });
+  Messages.add(newMessage)
+    .then((newMessage) => {
+      res.status(201).json({ newMessage: "newMessage created successfully", newMessage });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

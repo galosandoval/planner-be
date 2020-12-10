@@ -10,12 +10,12 @@ function validateTopicId(req, res, next) {
   const id = req.params.id;
 
   Topic.getById(id)
-    .then((Message) => {
-      if (Message) {
-        req.Message = Message;
+    .then((topic) => {
+      if (topic) {
+        req.topic = topic;
         next();
       } else {
-        res.status(404).json({ error: `Message with id ${id} does not exist` });
+        res.status(404).json({ error: `topic with id ${id} does not exist` });
       }
     })
     .catch((err) => {

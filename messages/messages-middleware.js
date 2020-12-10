@@ -10,9 +10,9 @@ function validateMessageId(req, res, next) {
   const id = req.params.id;
 
   Messages.getById(id)
-    .then((Message) => {
-      if (Message) {
-        req.Message = Message;
+    .then((message) => {
+      if (message) {
+        req.message = message;
         next();
       } else {
         res.status(404).json({ error: `Message with id ${id} does not exist` });
