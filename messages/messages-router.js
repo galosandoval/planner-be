@@ -18,7 +18,7 @@ router.get("/:id", validateMessageId, (req, res) => {
   res.status(200).json({ howto: req.message });
 });
 
-router.post("/", requiresToken, validateMessage, (req, res) => {
+router.post("/", validateMessage, (req, res) => {
   const newMessage = req.body;
 
   Messages.add(newMessage)
