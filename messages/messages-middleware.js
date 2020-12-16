@@ -24,15 +24,15 @@ function validateMessageId(req, res, next) {
 }
 
 function validateMessage(req, res, next) {
-  const { member_id } = req.body;
+  const { username } = req.body;
 
-  if (!member_id) {
+  if (!username) {
     res.status(400).json({
       error:
-        "Please provide all required fields: member_id",
+        "Please provide all required fields: username",
     });
   } else {
-    Member.findById(member_id)
+    Member.findById(username)
       .then((user) => {
         if (user) {
           next();
@@ -40,7 +40,7 @@ function validateMessage(req, res, next) {
           res
             .status(404)
             .json({
-              error: `User with id ${member_id} does not exist. Please provide a valid user id to post howto`,
+              error: `User with id ${username} does not exist. Please provide a valid user id to post howto`,
             });
         }
       })
