@@ -28,8 +28,8 @@ function findBy(filter) {
   return db("member").where(filter).orderBy("id");
 }
 
-function findById(username) {
-  return db("member").where(username).first();
+function findById(id) {
+  return db("member").where({ id }).first();
 }
 
 function loginIsValid(member) {
