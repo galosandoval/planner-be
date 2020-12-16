@@ -29,7 +29,7 @@ function findBy(filter) {
 }
 
 function findById(username) {
-  return db("member").where({ username }).first();
+  return db("member").where(username).first();
 }
 
 function loginIsValid(member) {
