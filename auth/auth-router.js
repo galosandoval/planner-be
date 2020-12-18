@@ -42,7 +42,7 @@ router.post("/login", (req, res) => {
           if (member && bcryptjs.compareSync(creds.password, member.password)) {
             const token = makeJwt(member);
 
-            res.status(200).json({ message: "Welcome to my chat app", token });
+            res.status(200).json({ message: "Welcome to my chat app", token, username: member.username, id: member.id});
           } else {
             res.status(401).json({ message: "Invalid credentials" });
           }
